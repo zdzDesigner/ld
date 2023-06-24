@@ -11,9 +11,14 @@ ld:
 	@go build -ldflags="-s -w" -o $@ && upx -9 $@
 
 elf:
-	@hexdump -C -n 8 out/init/out.o
+	@hexdump -C out/init/out.o
 
-elf8:
-	@hexdump -C -n 8 out/init/out.o
+# make elfn BYTE=100
+elfn:
+	@hexdump -C -n $(BYTE) out/init/out.o
 
-.PHONY: test elf8 ld
+
+section:
+	@readelf -S  out/init/out.o
+
+.PHONY: test elfn ld

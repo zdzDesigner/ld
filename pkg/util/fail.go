@@ -21,7 +21,7 @@ func MustNoErr(err error) {
 }
 
 // 断言
-func Assert(condition bool, errmsg any) {
+func Assert(condition bool, errmsg ...any) {
 	if condition {
 		return
 	}

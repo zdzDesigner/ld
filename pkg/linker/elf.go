@@ -12,14 +12,20 @@ type ELFHeader struct {
 	Version   uint32
 	Entry     uint64
 	PhOff     uint64
-	ShOff     uint64 // section header offset
+	ShOff     uint64 // section header offset 偏移
 	Flags     uint32
 	EhSize    uint16
 	PhEntSize uint16
 	PhNum     uint16
 	ShEntSize uint16
-	ShNum     uint16 // section 的数量
-	ShStrndx  uint16
+	ShNum     uint16 // section header number 的数量, 如果为0读取SectionHeader.Size (方便扩展)
+	ShStrndx  uint16 // section header string index 包含节名称字符串表的节的索引
+}
+
+// ELFHeader{ShNum, ShStrndx} 存放不下扩展
+type ProtocalSectionHeader struct {
+	ShNum    uint64
+	ShStrndx uint64
 }
 
 type SectionHeader struct {
